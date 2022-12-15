@@ -472,19 +472,18 @@ struct main_state : qsf::base_state {
 			auto target = this->original_text_hitbox[row - 1];
 
 			this->compressed_progress_rects.back().set_position(starting_pos);
-			this->compressed_progress_rects.back().set_dimension(target.position + target.dimension - starting_pos);
-			this->compressed_progress_rects.back().set_color(qpl::rgb::green.with_alpha(50));
+			this->compressed_progress_rects.back().set_dimension((target.position + target.dimension) - starting_pos);
+			this->compressed_progress_rects.back().set_color(qpl::rgb::green().with_alpha(50));
 			starting_index = row;
 		}
-
 
 		this->compressed_progress_rects.push_back({});
 
 		auto starting_pos = this->original_text_hitbox[starting_index].get_position();
 		auto target = this->original_text_hitbox[this->compressing_progress_index];
 		this->compressed_progress_rects.back().set_position(starting_pos);
-		this->compressed_progress_rects.back().set_dimension(target.position + target.dimension - starting_pos);
-		this->compressed_progress_rects.back().set_color(qpl::rgb::green.with_alpha(50));
+		this->compressed_progress_rects.back().set_dimension((target.position + target.dimension) - starting_pos);
+		this->compressed_progress_rects.back().set_color(qpl::rgb::green().with_alpha(50));
 	}
 
 	void compress_step() {
@@ -684,6 +683,15 @@ struct main_state : qsf::base_state {
 			this->draw(this->result_text_background, this->view);
 			this->draw(this->result_text, this->view);
 		}
+
+		//for (auto& i : this->original_text_hitbox) {
+		//	qsf::rectangle rect;
+		//	rect.set_hitbox(i);
+		//	rect.set_color(qpl::rgba::transparent());
+		//	rect.set_outline_color(qpl::rgb::red());
+		//	rect.set_outline_thickness(2.0f);
+		//	this->draw(rect, this->view);
+		//}
 	}
 
 	std::string string;
